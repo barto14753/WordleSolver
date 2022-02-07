@@ -1,12 +1,9 @@
 import string
-from matplotlib.pyplot import close
-from numpy import place
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from time import sleep
-from english_words import english_words_lower_set as en_words
 import random
 from nltk.corpus import words
 
@@ -162,9 +159,7 @@ def main(driver, nr):
     showed = []
     used = []
     tried = []
-
     words = get_words(words, placed, showed, tried, used)
-    
     driver.get(WEBSITE + str(nr))
 
     if nr == 1:
@@ -174,16 +169,10 @@ def main(driver, nr):
     print(recognize_element(el))
 
     while level < LEVELS and len(placed) < WORD_LEN:
-        # print("\nLevel " + str(level))
-        # print(len(words), placed, showed, used)
-
         words = get_words(words, placed, showed, tried, used)
-
         word = get_random_word(words, showed, used)
         words.remove(word)
-        # print(word)
         make_moves(driver, word)
-
         level, placed, showed, tried, used = evaluate(driver, word, level, placed, showed, tried, used)
 
 

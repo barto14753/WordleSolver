@@ -171,6 +171,10 @@ def main(driver, nr):
     while level < LEVELS and len(placed) < WORD_LEN:
         words = get_words(words, placed, showed, tried, used)
         word = get_random_word(words, showed, used)
+
+        if level == 0:
+            word = "crane"
+
         words.remove(word)
         make_moves(driver, word)
         level, placed, showed, tried, used = evaluate(driver, word, level, placed, showed, tried, used)
